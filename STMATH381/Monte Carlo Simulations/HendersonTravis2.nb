@@ -1,0 +1,372 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16895,        364]
+NotebookOptionsPosition[     16586,        348]
+NotebookOutlinePosition[     16921,        363]
+CellTagsIndexPosition[     16878,        360]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Travis", " ", "Henderson"}], ",", " ", 
+    RowBox[{"STMATH", " ", "381"}], ",", " ", 
+    RowBox[{"HW", " ", "#7"}], ",", " ", 
+    RowBox[{"Problem", " ", "2"}], ",", " ", 
+    RowBox[{
+     RowBox[{"16", "/", "08"}], "/", "06"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"simulation", "[", "x_", "]"}], ":=", 
+     RowBox[{"(", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListOfSold", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "These", " ", "lists", " ", "will", " ", "keep", " ", "track", " ", 
+         "of", " ", "the", " ", "numbers", " ", "for", " ", "each", " ", 
+         "simulation", " ", 
+         RowBox[{"iteration", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"ListOfLost", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"ListOfCust", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"profit", " ", "=", " ", "0"}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "How", " ", "much", " ", "money", " ", "is", " ", "made", " ", "over",
+          " ", "the", " ", "entire", " ", 
+         RowBox[{"simulation", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"simulationCount", "=", "1"}], ",", 
+         RowBox[{"simulationCount", "\[LessEqual]", "x"}], ",", 
+         RowBox[{"simulationCount", "++"}], ",", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+           RowBox[{
+           "This", " ", "for", " ", "loop", " ", "is", " ", "an", " ", 
+            "itreation", " ", "of", " ", "each", " ", "simulation"}], ",", 
+           " ", 
+           RowBox[{
+           "each", " ", "iteration", " ", "was", " ", "the", " ", "supplied", 
+            " ", 
+            RowBox[{"program", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+         
+         RowBox[{"(", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"a", " ", "=", " ", 
+            RowBox[{"1", "/", "3"}]}], ";", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "Probability", " ", "of", " ", "getting", " ", "a", " ", 
+             "customer", " ", "on", " ", "a", " ", "given", " ", "day"}], " ",
+             "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"d2d", "=", "2"}], ";", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "Days", " ", "to", " ", "get", " ", "new", " ", "product", " ", 
+             "after", " ", "ordering"}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"stock", " ", "=", " ", "1"}], ";", "\[IndentingNewLine]", 
+           
+           RowBox[{"deliv", " ", "=", " ", 
+            RowBox[{"-", "1"}]}], ";", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "#", " ", "of", " ", "days", " ", "until", " ", "an", " ", 
+             "order", " ", 
+             RowBox[{"arrives", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"totalsold", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"totallost", " ", "=", " ", "0"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"totalcust", " ", "=", " ", "0"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"numweeks", " ", "=", " ", "10"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"For", "[", 
+            RowBox[{
+             RowBox[{"i", "=", "1"}], ",", 
+             RowBox[{"i", "\[LessEqual]", "numweeks"}], ",", 
+             RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"(", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"For", "[", 
+                RowBox[{
+                 RowBox[{"j", "=", "1"}], ",", 
+                 RowBox[{"j", "\[LessEqual]", "7"}], ",", 
+                 RowBox[{"j", "++"}], ",", 
+                 RowBox[{"(*", " ", 
+                  RowBox[{
+                  "Iterate", " ", "through", " ", "days", " ", "of", " ", 
+                   RowBox[{"week", "."}]}], " ", "*)"}], 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"(", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"sold", " ", "=", " ", "0"}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"lost", " ", "=", " ", "0"}], ";", 
+                   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"stock", "\[GreaterEqual]", " ", "2"}], ",", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    RowBox[{
+                    "If", " ", "the", " ", "stock", " ", "is", " ", "greater",
+                     " ", "than", " ", "2"}], ",", " ", 
+                    RowBox[{
+                    "then", " ", "50", " ", "cents", " ", "is", " ", "lost", 
+                    " ", "each", " ", 
+                    RowBox[{"day", "."}]}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"profit", "-=", "0.5"}], ";"}]}], "]"}], ";", " ",
+                    "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"deliv", " ", "\[Equal]", " ", "0"}], ",", " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "This", " ", "means", " ", "the", " ", "item", " ", 
+                    RowBox[{"arrived", "/", "was"}], " ", 
+                    RowBox[{"delivered", "."}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"stock", "++"}], ";"}]}], "]"}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"deliv", " ", "\[GreaterEqual]", " ", "0"}], ",", 
+                    " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    RowBox[{"Item", " ", "still", " ", 
+                    RowBox[{"hasn", "'"}], "t", " ", "arrived"}], ",", " ", 
+                    RowBox[{
+                    "but", " ", "we", " ", "are", " ", "now", " ", "one", " ",
+                     "day", " ", "closer", " ", "to", " ", "delivery"}]}], 
+                    " ", "*)"}], "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"deliv", "--"}], ";"}]}], "]"}], ";", 
+                   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                   RowBox[{"randomnum", " ", "=", " ", 
+                    RowBox[{"Random", "[", 
+                    RowBox[{"Real", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], ",", "5"}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"randomnum", " ", "<", " ", "a"}], ",", " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "Simulate", " ", "whether", " ", "a", " ", "customer", 
+                    " ", "came", " ", "to", " ", "the", " ", "store", " ", 
+                    "or", " ", 
+                    RowBox[{"not", "."}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"customers", " ", "=", " ", "1"}], ";"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"customers", " ", "=", " ", "0"}]}], "]"}], ";", 
+                   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"customers", " ", "\[Equal]", "1"}], ",", " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{"A", " ", 
+                    RowBox[{"sale", "."}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"stock", " ", ">", " ", "0"}], ",", "  ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    RowBox[{"Customer", " ", "buys"}], ",", " ", 
+                    RowBox[{"decrement", " ", 
+                    RowBox[{"stock", "."}]}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"sold", "++"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"profit", " ", "+=", " ", "10"}], ";", " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "If", " ", "a", " ", "sale", " ", "was", " ", "made", " ",
+                     "then", " ", "add", " ", "$10", " ", "to", " ", "the", 
+                    " ", 
+                    RowBox[{"profit", "."}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"stock", "--"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"deliv", " ", "<", " ", "0"}], ",", " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "Keeping", " ", "tabs", " ", "on", " ", "delivery", " ", 
+                    RowBox[{"date", "."}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"deliv", "=", "d2d"}], ";"}]}], "]"}], ";"}], 
+                    "\[IndentingNewLine]", ")"}], ",", "\[IndentingNewLine]", 
+                    
+                    RowBox[{
+                    RowBox[{"profit", " ", "-=", " ", "2"}], ";", " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "If", " ", "a", " ", "sale", " ", "is", " ", "lost", " ", 
+                    "then", " ", "$2", " ", "is", " ", 
+                    RowBox[{"lost", "."}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"lost", "++"}]}]}], "]"}], ";"}], " ", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    RowBox[{
+                    "If", " ", "there", " ", "was", " ", "no", " ", "stock", 
+                    " ", "to", " ", "begin", " ", "with"}], ",", " ", 
+                    "though", ",", " ", 
+                    RowBox[{"sale", " ", "was", " ", 
+                    RowBox[{"lost", "."}]}]}], " ", "*)"}], 
+                    "\[IndentingNewLine]", ")"}]}], "]"}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"totalsold", " ", "=", " ", 
+                    RowBox[{"totalsold", " ", "+", " ", "sold"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"totallost", " ", "=", " ", 
+                    RowBox[{"totallost", " ", "+", " ", "lost"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"totalcust", " ", "=", " ", 
+                    RowBox[{"totalcust", " ", "+", " ", "customers"}]}], 
+                   ";"}], "\[IndentingNewLine]", ")"}]}], "]"}], ";"}], 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", ")"}]}], "]"}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"ListOfSold", ",", " ", "totalsold"}], "]"}], ";", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"I", "'"}], "m", " ", "appending", " ", "each", " ", 
+              "10", " ", "week", " ", "simulation", " ", "total", " ", "to", 
+              " ", "a", " ", "list"}], ",", " ", 
+             RowBox[{
+             "so", " ", "that", " ", "an", " ", "average", " ", "can", " ", 
+              "be", " ", "taken", " ", 
+              RowBox[{"later", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+           
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"ListOfLost", ",", " ", "totallost"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"ListOfCust", ",", " ", "totalcust"}], "]"}], ";"}], 
+          "\[IndentingNewLine]", ")"}]}], "]"}], ";"}], "\[IndentingNewLine]",
+       ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numSim", " ", "=", " ", "10"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "The", " ", "amount", " ", "of", " ", "simulations", " ", "that", " ", 
+      "simulation", " ", "will", " ", "be", " ", "ran", " ", 
+      RowBox[{"for", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"simulation", "[", "numSim", "]"}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<Average sold = \>\"", ",", 
+       RowBox[{"Mean", "[", "ListOfSold", "]"}]}], "]"}], ";", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "And", " ", "here", " ", "is", " ", "the", " ", "average", " ", 
+       "results", " ", "of", " ", "the", " ", "simulation"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<Average customers = \>\"", ",", 
+       RowBox[{"Mean", "[", "ListOfCust", "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<Average customers lost = \>\"", ",", 
+       RowBox[{"Mean", "[", "ListOfLost", "]"}]}], "]"}], ";"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Profit for simulation = \>\"", ",", " ", "profit"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.679486586704692*^9, 3.6794867168230886`*^9}, {
+   3.679486758330055*^9, 3.6794868017717743`*^9}, 3.679486834843204*^9, {
+   3.679487054307105*^9, 3.679487072154254*^9}, {3.6794871189342337`*^9, 
+   3.679487133642078*^9}, {3.679487183403129*^9, 3.6794872964779463`*^9}, {
+   3.679487346247098*^9, 3.679487490098151*^9}, {3.679487617513733*^9, 
+   3.679487667996776*^9}, {3.679487713868597*^9, 3.679487733037155*^9}, {
+   3.679487806645492*^9, 3.6794878330863743`*^9}, {3.679487878243532*^9, 
+   3.679487997761095*^9}, {3.679488036806616*^9, 3.679488107662098*^9}, {
+   3.67948814596961*^9, 3.6794881630244913`*^9}, {3.679488249038207*^9, 
+   3.679488254708808*^9}, 3.679488289954492*^9, {3.679488381806243*^9, 
+   3.6794883828220873`*^9}, {3.679488414276026*^9, 3.67948852864334*^9}, 
+   3.6794885619666243`*^9, 3.679488593464159*^9, {3.679488628184601*^9, 
+   3.67948866294656*^9}, {3.679488705828826*^9, 3.679488744291333*^9}, {
+   3.679488774484272*^9, 3.679488833689629*^9}, {3.6794889378101797`*^9, 
+   3.679488943803974*^9}, {3.679489100158944*^9, 3.679489145202465*^9}, {
+   3.679489194931555*^9, 3.67948925872935*^9}, {3.679490810767853*^9, 
+   3.679490813454817*^9}, {3.679490870181797*^9, 3.6794910499414253`*^9}, {
+   3.679491441298519*^9, 3.6794916616751204`*^9}, {3.6794917128417053`*^9, 
+   3.67949173407106*^9}, 3.679508091160166*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Profit for simulation = \"\>", "\[InvisibleSpace]", "1236"}],
+  SequenceForm["Profit for simulation = ", 1236],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.679486606485792*^9, 3.679486620709566*^9}, 
+   3.6794867194414454`*^9, {3.6794874684752417`*^9, 3.6794874953542423`*^9}, 
+   3.679487882575068*^9, {3.679487966753792*^9, 3.6794879698762503`*^9}, 
+   3.679488110194125*^9, 3.679488166245996*^9, 3.679488257855748*^9, 
+   3.679488292969326*^9, 3.679488951795204*^9, 3.6794891471625853`*^9, 
+   3.679489207126643*^9, {3.679491582196327*^9, 3.6794916643758383`*^9}, {
+   3.679491722857435*^9, 3.67949174887746*^9}, 3.679507833978936*^9, {
+   3.67950809957123*^9, 3.6795081246418962`*^9}}]
+}, Open  ]]
+},
+WindowSize->{923, 907},
+WindowMargins->{{Automatic, 87}, {Automatic, 22}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (April 11, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 15241, 309, 1727, "Input"],
+Cell[15824, 333, 746, 12, 23, "Print"]
+}, Open  ]]
+}
+]
+*)
+
